@@ -7,6 +7,6 @@ currentDir=$(pwd)
     --jprofiler-home="/Applications/JProfiler.app/" \
     --studio-install-dir="/Applications/Android Studio Meerkat.app" \
     --studio-sandbox-dir="$currentDir/profile-out/studio-sandbox" \
-    --gradle-version="9.0-branch-provider_api_migration_public_api_changes-20250304171043+0000" \
+    --gradle-version="8.11.1" \
     --project-dir="$currentDir" \
     --scenario-file "$currentDir/scenario.config" "runSync"

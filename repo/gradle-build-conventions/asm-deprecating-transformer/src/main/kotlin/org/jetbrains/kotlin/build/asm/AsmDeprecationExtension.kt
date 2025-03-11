@@ -76,7 +76,7 @@ abstract class AsmDeprecationExtension {
                             classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES)
                             val newBytes = classWriter.toByteArray()
                             val newEntry = ZipEntry(path)
-                            if (!preserveFileTimestamps.get()) {
+                            if (!isPreserveFileTimestamps) {
                                 newEntry.time = CONSTANT_TIME_FOR_ZIP_ENTRIES
                             }
                             intermediateZipFile.putNextEntry(newEntry)
@@ -85,7 +85,7 @@ abstract class AsmDeprecationExtension {
                         }
                     } else {
                         val newEntry = ZipEntry(if (isDirectory) "$path/" else path)
-                        if (!preserveFileTimestamps.get()) {
+                        if (!isPreserveFileTimestamps) {
                             newEntry.time = CONSTANT_TIME_FOR_ZIP_ENTRIES
                         }
                         intermediateZipFile.putNextEntry(newEntry)

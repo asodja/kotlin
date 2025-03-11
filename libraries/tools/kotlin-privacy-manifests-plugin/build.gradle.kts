@@ -31,7 +31,7 @@ if (kotlinBuildProperties.isApplePrivacyManifestsPluginEnabled) {
     configurations[functionalTest.implementationConfigurationName].extendsFrom(configurations.testImplementation.get())
 
     val cleanFunctionalTest = tasks.register<Delete>("cleanFunctionalTest") {
-        targetFiles.from(layout.buildDirectory.dir("functionalTest"))
+        setDelete(layout.buildDirectory.dir("functionalTest"))
     }
 
     tasks.register<Test>("functionalTest") {

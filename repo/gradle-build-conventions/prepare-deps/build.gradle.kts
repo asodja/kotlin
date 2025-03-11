@@ -180,7 +180,6 @@ fun prepareDeps(
         }
     }
 
-    @Suppress("DEPRECATION")
     val mergeSources = tasks.create("mergeSources${intellij.name.replaceFirstChar(Char::uppercase)}", Jar::class.java) {
         dependsOn(sources)
         isPreserveFileTimestamps = false

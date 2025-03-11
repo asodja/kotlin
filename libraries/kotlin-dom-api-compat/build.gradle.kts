@@ -74,7 +74,6 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile>().configureEa
     compilerOptions.allWarningsAsErrors.set(true)
 }
 
-@Suppress("DEPRECATION")
 val emptyJavadocJar by tasks.creating(Jar::class) {
     archiveClassifier.set("javadoc")
 }

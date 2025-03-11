@@ -174,7 +174,7 @@ fun Project.projectTest(
             if (jUnitMode == JUnitMode.JUnit5) return@doFirst
 
             val commandLineIncludePatterns = commandLineIncludePatterns.toMutableSet()
-            val patterns = filter.includePatterns.get() + commandLineIncludePatterns
+            val patterns = filter.includePatterns + commandLineIncludePatterns
             if (patterns.isEmpty() || patterns.any { '*' in it }) return@doFirst
             patterns.forEach { pattern ->
                 var isClassPattern = false
@@ -197,7 +197,7 @@ fun Project.projectTest(
                     val innerClassPattern = "$pattern$*"
                     if (pattern in commandLineIncludePatterns) {
                         commandLineIncludePatterns.add(innerClassPattern)
-                        (filter as? DefaultTestFilter)?.commandLineIncludePatterns?.set(commandLineIncludePatterns)
+                        (filter as? DefaultTestFilter)?.setCommandLineIncludePatterns(commandLineIncludePatterns)
                     } else {
                         filter.includePatterns.add(innerClassPattern)
                     }
@@ -342,7 +342,7 @@ val totalMaxMemoryForTestsMb: Int
     }
 
 val Test.commandLineIncludePatterns: Set<String>
-    get() = (filter as? DefaultTestFilter)?.commandLineIncludePatterns?.get().orEmpty()
+    get() = (filter as? DefaultTestFilter)?.commandLineIncludePatterns.orEmpty()
 
 private inline fun String.isFirstChar(f: (Char) -> Boolean) = isNotEmpty() && f(first())
 

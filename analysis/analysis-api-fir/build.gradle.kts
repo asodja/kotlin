@@ -110,7 +110,7 @@ val generateCode by tasks.registering(NoDebugJavaExec::class) {
     workingDir = rootDir
     classpath = generatorClasspath
     mainClass.set("org.jetbrains.kotlin.analysis.api.fir.generator.MainKt")
-    systemProperty("line.separator", "\n")
+    systemProperties["line.separator"] = "\n"
 }
 
 val compileKotlin by tasks
