@@ -60,3 +60,8 @@ kotlin-ide/
 .kotlin/
 .teamcity/
 .npmrc
+profile-out/
+profile-out-*/
+results/
+.idea/
+gradle-user-home/
