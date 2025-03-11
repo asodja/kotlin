@@ -72,7 +72,7 @@ buildCache {
     local {
         isEnabled = buildProperties.localBuildCacheEnabled
         if (buildProperties.localBuildCacheDirectory != null) {
-            directory = buildProperties.localBuildCacheDirectory
+            directory = File(buildProperties.localBuildCacheDirectory)
         }
     }
     if (develocity.server.isPresent) {

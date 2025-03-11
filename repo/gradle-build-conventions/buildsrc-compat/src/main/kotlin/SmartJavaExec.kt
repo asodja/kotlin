@@ -19,6 +19,7 @@ fun Project.smartJavaExec(configure: JavaExec.() -> Unit) = tasks.creating(JavaE
 
 // Moves the classpath into a jar metadata, to shorten the command line length and to avoid hitting the limit on Windows
 fun JavaExec.passClasspathInJar() {
+    @Suppress("DEPRECATION")
     val jarTask = project.task("${name}WriteClassPath", Jar::class) {
         val classpath = classpath
         val main = mainClass.get()
