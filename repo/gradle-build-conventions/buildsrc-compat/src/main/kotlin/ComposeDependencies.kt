@@ -4,6 +4,7 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.kotlin.dsl.maven
 import java.net.URI
+import org.gradle.kotlin.dsl.assign
 
 /*
  * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.

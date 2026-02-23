@@ -113,8 +113,10 @@ fun Project.customCompilerTest(
             )
         }
         doLast {
-            systemProperties.remove("kotlin.internal.native.test.compat.customCompilerDist")
-            systemProperties.remove("kotlin.internal.native.test.compat.customCompilerClasspath")
+            val sysProps = systemProperties.get().toMutableMap()
+            sysProps.remove("kotlin.internal.native.test.compat.customCompilerDist")
+            sysProps.remove("kotlin.internal.native.test.compat.customCompilerClasspath")
+            systemProperties = sysProps
         }
         systemProperty("kotlin.internal.native.test.compat.customCompilerVersion", version.rawVersion)
         body()

@@ -10,6 +10,7 @@ import org.gradle.process.ExecOperations
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 import kotlin.text.trim
+import org.gradle.kotlin.dsl.assign
 
 abstract class XcodeToolchainValueSource @Inject constructor(private val execOperations: ExecOperations) :
     ValueSource<String, ValueSourceParameters.None> {

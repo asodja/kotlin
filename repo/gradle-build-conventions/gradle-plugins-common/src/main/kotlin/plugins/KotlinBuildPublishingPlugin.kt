@@ -118,8 +118,8 @@ fun MavenPublication.configureKotlinPomAttributes(
     val publication = this
     pom {
         this.packaging = packaging
-        name.set(explicitName.orElse(humanReadableName(publication.artifactId)))
-        description.set(explicitDescription.orElse(project.description ?: humanReadableName(publication.artifactId)))
+        name.set(explicitName.orElse(publication.artifactId.map { humanReadableName(it) }))
+        description.set(explicitDescription.orElse(project.provider { project.description }.orElse(publication.artifactId.map { humanReadableName(it) } )))
         url.set("https://kotlinlang.org/")
         licenses {
             license {
@@ -178,7 +178,8 @@ fun Project.configureDefaultPublishing(
                 )
 
                 setUrl(repoUrl)
-                if (url.scheme != "file" && username != null && password != null) {
+                // It's safe to call .get() here, since we just set it one line above
+                if (url.get().scheme != "file" && username != null && password != null) {
                     credentials {
                         this.username = username
                         this.password = password

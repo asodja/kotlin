@@ -7,7 +7,8 @@ dependencies {
 }
 
 publish {
-    artifactId = artifactId.replace(".", "-")
+    // TODO: Should we use Property.replace {} here?
+    artifactId = artifactId.get().replace(".", "-")
 }
 
 runtimeJar(rewriteDefaultJarDepsToShadedCompiler())

@@ -31,6 +31,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.attributes.KlibPackaging
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinUsages
 import java.io.File
+import org.gradle.kotlin.dsl.assign
 
 @RequiresOptIn(
     level = RequiresOptIn.Level.ERROR,

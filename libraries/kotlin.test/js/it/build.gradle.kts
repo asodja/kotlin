@@ -75,7 +75,7 @@ fun createFrameworkTest(name: String): TaskProvider<NpmTask> {
         group = "verification"
 
         execOverrides {
-            isIgnoreExitValue = true
+            ignoreExitValue = true
             standardOutput = FileOutputStream(stdOutput.get().asFile)
             errorOutput = FileOutputStream(errOutput.get().asFile)
         }

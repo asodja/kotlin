@@ -91,7 +91,7 @@ fun Test.ensureExecutedAgainstExpectedBuildToolsImplVersion(version: BuildToolsV
     // the check is required for the case when Gradle substitutes external dependencies with project ones
     doFirst {
         // we cannot check systemProperties because the classpath is configured in addClasspathProperty via jvmArgumentProviders
-        val compilerClasspath = jvmArgumentProviders
+        val compilerClasspath = jvmArgumentProviders.get()
             .map { it.asArguments().joinToString("|||") }
             .find { compilerClasspathProperty in it }
             ?.substring("-D$compilerClasspathProperty=".length)

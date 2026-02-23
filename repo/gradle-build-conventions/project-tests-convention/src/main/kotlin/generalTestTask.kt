@@ -25,6 +25,7 @@ import java.lang.Character.isLowerCase
 import java.lang.Character.isUpperCase
 import java.nio.file.Files
 import javax.inject.Inject
+import org.gradle.kotlin.dsl.assign
 
 
 // Mixing JUnit4 and Junit5 in one module proved to be problematic, consider using separate modules instead
@@ -64,7 +65,7 @@ private fun Test.cleanupInvalidExcludePatternsForTCParallelTests(excludesFilePat
     }
 
     val parallelTestsExcludes = File(excludesFilePath).readLines().filter { !it.startsWith("#") }.toSet()
-    val excludePatterns = filter.excludePatterns
+    val excludePatterns = filter.excludePatterns.get()
 
     parallelTestsExcludes.forEach {
         if (!candidateTestClassNames.contains(it)) {
@@ -74,7 +75,8 @@ private fun Test.cleanupInvalidExcludePatternsForTCParallelTests(excludesFilePat
         }
     }
 
-    filter.setExcludePatterns(*excludePatterns.toTypedArray())
+
+    filter.getExcludePatterns().set(excludePatterns)
 }
 
 abstract class GeneralTestArgumentProvider @Inject constructor() : CommandLineArgumentProvider {
@@ -160,7 +162,7 @@ internal fun Project.createGeneralTestTask(
             if (jUnitMode == JUnitMode.JUnit5) return@doFirst
 
             val commandLineIncludePatterns = commandLineIncludePatterns.toMutableSet()
-            val patterns = filter.includePatterns + commandLineIncludePatterns
+            val patterns = filter.includePatterns.get() + commandLineIncludePatterns
             if (patterns.isEmpty() || patterns.any { '*' in it }) return@doFirst
             patterns.forEach { pattern ->
                 var isClassPattern = false
@@ -183,7 +185,7 @@ internal fun Project.createGeneralTestTask(
                     val innerClassPattern = "$pattern$*"
                     if (pattern in commandLineIncludePatterns) {
                         commandLineIncludePatterns.add(innerClassPattern)
-                        (filter as? DefaultTestFilter)?.setCommandLineIncludePatterns(commandLineIncludePatterns)
+                        (filter as? DefaultTestFilter)?.getCommandLineIncludePatterns()?.set(commandLineIncludePatterns)
                     } else {
                         filter.includePatterns.add(innerClassPattern)
                     }
@@ -314,6 +316,6 @@ internal fun Project.createGeneralTestTask(
 private val defaultMaxMemoryPerTestWorkerMb = 1600
 
 private val Test.commandLineIncludePatterns: Set<String>
-    get() = (filter as? DefaultTestFilter)?.commandLineIncludePatterns.orEmpty()
+    get() = (filter as? DefaultTestFilter)?.commandLineIncludePatterns?.getOrNull().orEmpty()
 
 private inline fun String.isFirstChar(f: (Char) -> Boolean) = isNotEmpty() && f(first())

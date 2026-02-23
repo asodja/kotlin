@@ -66,22 +66,22 @@ develocity {
 
 buildCache {
     local {
-        isEnabled = buildProperties.localBuildCacheEnabled.get()
+        enabled = buildProperties.localBuildCacheEnabled
         if (buildProperties.localBuildCacheDirectory.orNull != null) {
-            directory = buildProperties.localBuildCacheDirectory.get()
+            directory = settings.layout.rootDirectory.dir(buildProperties.localBuildCacheDirectory)
         }
     }
     if (develocity.server.isPresent) {
         if (System.getenv("TC_K8S_CLOUD_PROFILE_ID") == "kotlindev-kotlin-k8s") {
             remote(develocity.buildCache) {
-                isPush = buildProperties.pushToBuildCache.get()
+                push = buildProperties.pushToBuildCache
                 server = "https://kotlin-cache.eqx.k8s.intellij.net"
             }
         } else {
             remote(develocity.buildCache) {
-                isPush = buildProperties.pushToBuildCache.get()
+                push = buildProperties.pushToBuildCache
                 val remoteBuildCacheUrl = buildProperties.buildCacheUrl.orNull?.trim()
-                isEnabled = remoteBuildCacheUrl != "" // explicit "" disables it
+                enabled = remoteBuildCacheUrl != "" // explicit "" disables it
                 if (!remoteBuildCacheUrl.isNullOrEmpty()) {
                     server = remoteBuildCacheUrl.removeSuffix("/cache/")
                 }

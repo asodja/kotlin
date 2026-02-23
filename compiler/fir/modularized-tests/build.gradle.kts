@@ -73,7 +73,7 @@ projectTests {
         generateTestsInBuildDirectory = true, skipCollectDataTask = true
     ) {
         fun String?.withModelDumpOrEmpty() = this?.let { "$it/test-project-model-dump" }.orEmpty()
-        args = args!! + "--" +
+        args += "--" +
                 "Kotlin" + kotlinBuildProperties.pathToKotlinModularizedTestData.withModelDumpOrEmpty() +
                 "IntelliJ" + kotlinBuildProperties.pathToIntellijModularizedTestData.withModelDumpOrEmpty() +
                 "YouTrack" + kotlinBuildProperties.pathToYoutrackModularizedTestData.withModelDumpOrEmpty() +

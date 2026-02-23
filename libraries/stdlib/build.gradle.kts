@@ -904,9 +904,10 @@ tasks {
         classpath = compilation.compileDependencyFiles + compilation.runtimeDependencyFiles + compilation.output.allOutputs
 
         doFirst {
-            workingDir = jvmRecursiveDeletionTestTmpDir.get().toFile()
-            workingDir.deleteRecursively()
-            workingDir.mkdirs()
+            val testDir = jvmRecursiveDeletionTestTmpDir.get().toFile()
+            workingDir = testDir
+            testDir.deleteRecursively()
+            testDir.mkdirs()
         }
         finalizedBy(jvmRecursiveDeletionTestCleanup)
     }

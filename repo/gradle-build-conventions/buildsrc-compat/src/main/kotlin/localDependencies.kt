@@ -23,6 +23,7 @@ import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.api.artifacts.repositories.IvyArtifactRepository
 import org.gradle.kotlin.dsl.extra
 import java.io.File
+import org.gradle.kotlin.dsl.assign
 
 private fun Project.kotlinBuildLocalDependenciesDir(): File =
     (findProperty("kotlin.build.dependencies.dir") as String?)?.let(::File)

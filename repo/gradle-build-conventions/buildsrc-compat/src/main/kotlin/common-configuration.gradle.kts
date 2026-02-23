@@ -257,8 +257,8 @@ fun Project.configureArtifacts() {
     }
 
     tasks.withType<AbstractArchiveTask>().configureEach {
-        isPreserveFileTimestamps = false
-        isReproducibleFileOrder = true
+        preserveFileTimestamps = false
+        reproducibleFileOrder = true
         filePermissions {
             configureDefaultFilePermissions()
         }

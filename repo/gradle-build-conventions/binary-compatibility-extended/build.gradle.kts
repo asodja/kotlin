@@ -64,8 +64,8 @@ gradlePlugin {
 
 tasks.withType<AbstractArchiveTask>().configureEach {
     // reproducible builds https://docs.gradle.org/8.8/userguide/working_with_files.html#sec:reproducible_archives
-    isPreserveFileTimestamps = false
-    isReproducibleFileOrder = true
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
 }
 
 project.configurations.named(org.jetbrains.kotlin.gradle.plugin.PLUGIN_CLASSPATH_CONFIGURATION_NAME + "Main") {

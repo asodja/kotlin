@@ -76,7 +76,7 @@ benchmark {
 }
 
 tasks.withType<Zip>().matching { it.name == "mainBenchmarkJar" }.configureEach {
-    isZip64 = true
+    zip64 = true
     archiveFileName.set("benchmarks.jar")
 }
 

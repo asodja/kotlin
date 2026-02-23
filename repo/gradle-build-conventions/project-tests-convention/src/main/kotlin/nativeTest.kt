@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.KonanTarget
 import java.io.File
 import javax.inject.Inject
+import org.gradle.kotlin.dsl.assign
 
 private enum class TestProperty(shortName: String) {
     // Use a separate Gradle property to pass Kotlin/Native home to tests: "kotlin.internal.native.test.nativeHome".
@@ -392,7 +393,7 @@ fun ProjectTestsExtension.nativeTestTask(
                 buildString {
                     appendLine("$path parallel test execution parameters:")
                     append("  Available CPU cores = $availableCpuCores")
-                    systemProperties.filterKeys { it.startsWith("junit.jupiter") }.toSortedMap().forEach { (key, value) ->
+                    systemProperties.get().filterKeys { it.startsWith("junit.jupiter") }.toSortedMap().forEach { (key, value) ->
                         append("\n  $key = $value")
                     }
                 }

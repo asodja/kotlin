@@ -10,6 +10,7 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.newInstance
 import org.gradle.kotlin.dsl.the
 import org.jetbrains.kotlin.build.d8.D8Extension
+import org.gradle.kotlin.dsl.plusAssign
 
 /**
  * @param taskName Name of Gradle task.

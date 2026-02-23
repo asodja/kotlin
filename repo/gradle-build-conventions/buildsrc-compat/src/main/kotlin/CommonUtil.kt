@@ -63,7 +63,7 @@ fun Project.getBooleanProperty(name: String): Boolean? = this.findProperty(name)
     else v.toBoolean()
 }
 
-fun JavaExec.pathRelativeToWorkingDir(file: File): String = file.relativeTo(workingDir).invariantSeparatorsPath
+fun JavaExec.pathRelativeToWorkingDir(file: File): String = file.relativeTo(workingDir.asFile.get()).invariantSeparatorsPath
 
 fun Task.singleOutputFile(layout: ProjectLayout): File = when (this) {
     is AbstractArchiveTask -> archiveFile.get().asFile

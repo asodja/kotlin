@@ -83,7 +83,8 @@ tasks.register<TestDataManagerModuleTask>(manageTestDataTaskName) {
      *
      * Also see KT-84278.
      * */
-    systemProperties = testTask.systemProperties.filterKeys { !it.startsWith("java.security.") }
+    // MapProperty
+    systemProperties = testTask.systemProperties.map { value -> value.filterKeys { !it.startsWith("java.security.") } }
 
     // Forward idea.active to enable IDE integration in TestDataManagerRunner
     if (project.providers.systemProperty("idea.active").isPresent) {

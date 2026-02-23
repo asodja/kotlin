@@ -9,6 +9,7 @@ import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+import org.gradle.kotlin.dsl.assign
 
 enum class JdkMajorVersion(
     val majorVersion: Int,
