@@ -14,6 +14,8 @@ import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
+import org.gradle.kotlin.dsl.assign
+import org.gradle.kotlin.dsl.set
 import org.gradle.process.ExecOperations
 import org.gradle.workers.WorkAction
 import org.gradle.workers.WorkParameters
@@ -51,7 +53,7 @@ private abstract class ClangFrontendJob : WorkAction<ClangFrontendJob.Parameters
             execOperations.execLlvmUtility(platformManager.get(), compilerExecutable.get()) {
                 workingDir = workingDirectory.asFile.get()
                 args = arguments.get() + listOf(inputPathRelativeToWorkingDir.get(), "-o", outputFile.get().asFile.absolutePath)
-                environment["PATH"] = clangPaths.get() + File.pathSeparator + environment["PATH"]
+                environment["PATH"] = clangPaths.get() + File.pathSeparator + environment.getting("PATH").get()
             }
         }
     }

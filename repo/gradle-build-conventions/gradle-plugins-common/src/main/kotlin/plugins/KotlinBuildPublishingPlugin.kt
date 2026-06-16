@@ -3,6 +3,8 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
+@file:Suppress("DEPRECATION")
+
 package plugins
 
 import capitalize
@@ -118,8 +120,8 @@ fun MavenPublication.configureKotlinPomAttributes(
     val publication = this
     pom {
         this.packaging = packaging
-        name.set(explicitName.orElse(humanReadableName(publication.artifactId)))
-        description.set(explicitDescription.orElse(project.description ?: humanReadableName(publication.artifactId)))
+        name.set(explicitName.orElse(humanReadableName(publication.artifactId.get())))
+        description.set(explicitDescription.orElse(project.description ?: humanReadableName(publication.artifactId.get())))
         url.set("https://kotlinlang.org/")
         licenses {
             license {
@@ -178,7 +180,7 @@ fun Project.configureDefaultPublishing(
                 )
 
                 setUrl(repoUrl)
-                if (url.scheme != "file" && username != null && password != null) {
+                if (url.get().scheme != "file" && username != null && password != null) {
                     credentials {
                         this.username = username
                         this.password = password

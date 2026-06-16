@@ -7,6 +7,8 @@ import org.gradle.api.Task
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.testing.Test
+import org.gradle.kotlin.dsl.assign
+import org.gradle.kotlin.dsl.plusAssign
 
 private val CODEBASE_CHECKING_TASK_NAMES = setOf(
     "updateKotlinAbi",

@@ -201,9 +201,9 @@ fun URI.maybeRedirect(): URI {
 
 fun RepositoryHandler.redirect() = configureEach {
     when (this) {
-        is MavenArtifactRepository -> url = url.maybeRedirect()
-        is IvyArtifactRepository -> @Suppress("SENSELESS_COMPARISON") if (url != null) {
-            url = url.maybeRedirect()
+        is MavenArtifactRepository -> url = url.get().maybeRedirect()
+        is IvyArtifactRepository -> @Suppress("SENSELESS_COMPARISON") if (url.get() != null) {
+            url = url.get().maybeRedirect()
         }
     }
 }
@@ -282,12 +282,12 @@ abstract class CheckRepositoriesTask : DefaultTask() {
 
     private fun RepositoryHandler.findNonCachedRepositories(): List<String> {
         val mavenNonCachedRepos = filterIsInstance<MavenArtifactRepository>()
-            .filterNot { it.url.isCachedOrLocal() }
-            .map { it.url.toString() }
+            .filterNot { it.url.get().isCachedOrLocal() }
+            .map { it.url.get().toString() }
 
         val ivyNonCachedRepos = filterIsInstance<IvyArtifactRepository>()
-            .filterNot { it.url.isCachedOrLocal() }
-            .map { it.url.toString() }
+            .filterNot { it.url.get().isCachedOrLocal() }
+            .map { it.url.get().toString() }
 
         return mavenNonCachedRepos + ivyNonCachedRepos
     }

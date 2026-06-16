@@ -6,6 +6,7 @@
 package org.jetbrains.kotlin
 
 import org.gradle.api.Action
+import org.gradle.kotlin.dsl.assign
 import org.gradle.process.ExecOperations
 import org.gradle.process.ExecResult
 import org.gradle.process.ExecSpec

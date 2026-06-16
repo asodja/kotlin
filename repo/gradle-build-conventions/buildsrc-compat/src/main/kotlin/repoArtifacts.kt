@@ -1,4 +1,4 @@
-@file:Suppress("unused") // usages in build scripts are not tracked properly
+@file:Suppress("unused", "DEPRECATION") // usages in build scripts are not tracked properly
 @file:JvmName("RepoArtifacts")
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
