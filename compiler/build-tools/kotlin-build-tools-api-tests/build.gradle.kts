@@ -67,7 +67,9 @@ val scriptingCompilerPluginResolvable = configurations.resolvable("scriptingComp
     extendsFrom(scriptingCompilerPlugin.get())
 }
 
+@Suppress("DEPRECATION")
 val unpackedResources by configurations.dependencyScope("unpackedResources")
+@Suppress("DEPRECATION")
 val unpackedResourcesResolvable by configurations.resolvable("unpackedResourcesResolvable") {
     // Wire the dependency declarations
     extendsFrom(unpackedResources)
@@ -150,6 +152,7 @@ fun Test.ensureExecutedAgainstExpectedBuildToolsImplVersion(version: BuildToolsV
     doFirst {
         // we cannot check systemProperties because the classpath is configured in addClasspathProperty via jvmArgumentProviders
         val compilerClasspath = jvmArgumentProviders
+            .get()
             .map { it.asArguments().joinToString("|||") }
             .find { compilerClasspathProperty in it }
             ?.substring("-D$compilerClasspathProperty=".length)

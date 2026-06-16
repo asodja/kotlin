@@ -10,6 +10,7 @@ import org.gradle.kotlin.dsl.get
 import kotlin.properties.PropertyDelegateProvider
 import GeneratorInputKind.RuntimeClasspath
 import GeneratorInputKind.SourceSetJar
+import org.gradle.kotlin.dsl.assign
 
 enum class GeneratorInputKind {
     RuntimeClasspath,

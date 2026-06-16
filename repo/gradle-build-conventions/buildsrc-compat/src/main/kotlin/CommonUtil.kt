@@ -1,5 +1,5 @@
 // usages in build scripts are not tracked properly
-@file:Suppress("unused")
+@file:Suppress("unused", "DEPRECATION")
 
 import groovy.lang.Closure
 import org.gradle.api.Project

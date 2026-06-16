@@ -13,6 +13,7 @@ import org.gradle.api.provider.Provider
 import org.gradle.api.provider.ProviderFactory
 import org.gradle.api.tasks.*
 import org.gradle.api.tasks.testing.Test
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.newInstance
 import org.gradle.kotlin.dsl.project
@@ -132,7 +133,7 @@ internal fun Project.createGeneralTestTask(
             if (jUnitMode == JUnitMode.JUnit5) return@doFirst
 
             val commandLineIncludePatterns = commandLineIncludePatterns.toMutableSet()
-            val patterns = filter.includePatterns + commandLineIncludePatterns
+            val patterns = filter.includePatterns.get() + commandLineIncludePatterns
             if (patterns.isEmpty() || patterns.any { '*' in it }) return@doFirst
             patterns.forEach { pattern ->
                 var isClassPattern = false
@@ -255,7 +256,9 @@ internal fun Project.createGeneralTestTask(
             if (excludesFile.isPresent) {
                 logger.warn("Removing excludes set by TeamCity")
                 val parallelTestsExcludes = File(excludesFile.get().path).readLines().filter { !it.startsWith("#") }.toSet()
-                filter.excludePatterns.removeAll(parallelTestsExcludes)
+                filter.excludePatterns = filter.excludePatterns.get().toMutableSet().apply {
+                    this.removeAll(parallelTestsExcludes)
+                }
             }
         }
 
@@ -292,6 +295,6 @@ internal fun Project.createGeneralTestTask(
 private val defaultMaxMemoryPerTestWorkerMb = 1600
 
 private val Test.commandLineIncludePatterns: Set<String>
-    get() = (filter as? DefaultTestFilter)?.commandLineIncludePatterns.orEmpty()
+    get() = (filter as? DefaultTestFilter)?.commandLineIncludePatterns?.get().orEmpty()
 
 private inline fun String.isFirstChar(f: (Char) -> Boolean) = isNotEmpty() && f(first())

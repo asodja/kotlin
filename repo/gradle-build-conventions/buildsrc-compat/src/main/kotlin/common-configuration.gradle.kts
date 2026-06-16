@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.internal.file.collections.DefaultConfigurableFileCollection
